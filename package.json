@@ -1,0 +1,27 @@
+{
+  "name": "hubot-tell",
+  "description": "Hubot plugin to send a user a message the next time they are present in the room",
+  "version": "1.0.0",
+  "author": "Lorenz Hübschle-Schneider <dev@4z2.de>",
+  "license": "MIT",
+
+  "keywords": [
+    "hubot",
+    "hubot-scripts"
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lorenzhs/hubot-tell.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/lorenzhs/hubot-tell/issues"
+  },
+
+  "dependencies": {
+    "coffee-script": "~1.7"
+  },
+
+  "main": "index.coffee"
+}
