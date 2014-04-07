@@ -18,7 +18,11 @@
 #   christianchristensen, lorenzhs, xhochy, patcon
 
 config =
-  aliases: if process.env.HUBOT_TELL_ALIASES? then process.env.HUBOT_TELL_ALIASES.split(',') else []
+  aliases: if process.env.HUBOT_TELL_ALIASES?
+    # Split and remove empty array values.
+    process.env.HUBOT_TELL_ALIASES.split(',').filter((x) -> x?.length)
+  else
+    []
 
 module.exports = (robot) ->
   localstorage = {}
