@@ -8,11 +8,13 @@
 #   HUBOT_TELL_ALIASES [optional] - Comma-separated string of command aliases for "tell".
 #
 # Commands:
-#   hubot tell <username> <some message> - tell <username> <some message> next time they are present.
+#   hubot tell <recipients> <some message> - tell <recipients> <some message> next time they are present.
 #
 # Notes:
 #   Case-insensitive prefix matching is employed when matching usernames, so
 #   "foo" also matches "Foo" and "foooo".
+#   A comma-separated list of recipients can be supplied to relay the message
+#   to each of them.
 #
 # Author:
 #   christianchristensen, lorenzhs, xhochy, patcon
@@ -30,22 +32,23 @@ module.exports = (robot) ->
   commands = ["tell"].concat(config.aliases)
   commands = commands.join '|'
 
-  REGEX = ///(#{commands})\s+([\w.-]+):?\s+(.*)///i
+  REGEX = ///(#{commands})\s+([\w,.-]+):?\s+(.*)///i
 
   robot.respond REGEX, (msg) ->
     datetime = new Date()
     verb = msg.match[1]
-    username = msg.match[2]
+    recipients = msg.match[2].split(',').filter((x) -> x?.length)
     message = msg.match[3]
     room = msg.message.user.room
     tellmessage = msg.message.user.name + " @ " + datetime.toLocaleString() + " said: " + message + "\r\n"
     if not localstorage[room]?
       localstorage[room] = {}
-    if localstorage[room][username]?
-      localstorage[room][username] += tellmessage
-    else
-      localstorage[room][username] = tellmessage
-    msg.send "Ok, I'll #{verb} #{username} '#{message}'."
+    for recipient in recipients
+      if localstorage[room][recipient]?
+        localstorage[room][recipient] += tellmessage
+      else
+        localstorage[room][recipient] = tellmessage
+    msg.send "Ok, I'll #{verb} #{recipients.join ', '} '#{message}'."
     return
 
   # When a user enters, check if someone left them a message
