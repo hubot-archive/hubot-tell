@@ -27,7 +27,7 @@ config =
     []
 
 module.exports = (robot) ->
-  localstorage = {}
+  localstorage = robot.brain.get('hubot-tell') or {}
 
   commands = ["tell"].concat(config.aliases)
   commands = commands.join '|'
@@ -48,6 +48,7 @@ module.exports = (robot) ->
         localstorage[room][recipient] += tellmessage
       else
         localstorage[room][recipient] = tellmessage
+    robot.brain.set 'hubot-tell', localstorage
     msg.send "Ok, I'll #{verb} #{recipients.join ', '} '#{message}'."
     return
 
@@ -61,5 +62,6 @@ module.exports = (robot) ->
         if username.match(new RegExp "^"+recipient, "i")
           tellmessage = username + ": " + localstorage[room][recipient]
           delete localstorage[room][recipient]
+          robot.brain.set 'hubot-tell', localstorage
           msg.send tellmessage
     return
