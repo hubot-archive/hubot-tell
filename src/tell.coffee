@@ -29,8 +29,8 @@ config =
 module.exports = (robot) ->
   localstorage = {}
 
-  commands = ["tell"].concat(config.aliases)
-  commands = commands.join '|'
+  commands = ['tell'].concat(config.aliases)
+  commands = commands.join('|')
 
   REGEX = ///(#{commands})\s+([\w,.-]+):?\s+(.*)///i
 
@@ -40,7 +40,7 @@ module.exports = (robot) ->
     recipients = msg.match[2].split(',').filter((x) -> x?.length)
     message = msg.match[3]
     room = msg.message.user.room
-    tellmessage = msg.message.user.name + " @ " + datetime.toLocaleString() + " said: " + message + "\r\n"
+    tellmessage = "#{msg.message.user.name} @ #{datetime.toLocaleString()} said: #{message}\r\n"
     if not localstorage[room]?
       localstorage[room] = {}
     for recipient in recipients
@@ -48,7 +48,7 @@ module.exports = (robot) ->
         localstorage[room][recipient] += tellmessage
       else
         localstorage[room][recipient] = tellmessage
-    msg.send "Ok, I'll #{verb} #{recipients.join ', '} '#{message}'."
+    msg.send("Ok, I'll #{verb} #{recipients.join(', ')} '#{message}'.")
     return
 
   # When a user enters, check if someone left them a message
@@ -58,8 +58,8 @@ module.exports = (robot) ->
     if localstorage[room]?
       for recipient, message of localstorage[room]
         # Check if the recipient matches username
-        if username.match(new RegExp "^"+recipient, "i")
-          tellmessage = username + ": " + localstorage[room][recipient]
+        if username.match(new RegExp("^#{recipient}"), "i")
+          tellmessage = "#{username}: #{localstorage[room][recipient]}"
           delete localstorage[room][recipient]
-          msg.send tellmessage
+          msg.send(tellmessage)
     return
