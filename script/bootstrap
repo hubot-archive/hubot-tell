@@ -16,4 +16,3 @@ npm install
 
 # Make sure coffee and mocha are on the path
 export PATH="node_modules/.bin:$PATH"
-
