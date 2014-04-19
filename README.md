@@ -3,6 +3,28 @@ hubot-tell
 
 Hubot plugin to send a user a message the next time they are present in the room
 
+Installation
+------------
+
+Add **hubot-tell** to your `package.json` file:
+
+```json
+"dependencies": {
+  "hubot": ">= 2.5.1",
+  "hubot-scripts": ">= 2.4.2",
+  "hubot-tell": "*",
+  "hubot-hipchat": "~2.5.1-5",
+}
+```
+
+Add **hubot-tell** to your `external-scripts.json`:
+
+```json
+["hubot-tell"]
+```
+
+Run `npm install`
+
 Usage
 -----
 
@@ -15,4 +37,4 @@ The message will then be stored and relayed to the recipient as soon as he or sh
 Authors
 -------
 
-Contributions to this script have been made by @christianchristensen, @cover, @xhochy, @BFGeorge9000, @technicalpickles, and me. This information was lost when migrating this script from the github/hubot-scripts repository, so they shall be listed here instead ;)
+Contributions to this script were made by @christianchristensen, @cover, @xhochy, @BFGeorge9000, @technicalpickles, and me before it was migrated to this repository. This information was lost during the migration process from the github/hubot-scripts repository, so they shall be listed here instead ;)
