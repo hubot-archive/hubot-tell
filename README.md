@@ -8,7 +8,7 @@ Installation
 
 Add **hubot-tell** to your `package.json` file:
 
-```json
+```javascript
 "dependencies": {
   "hubot": ">= 2.5.1",
   "hubot-tell": "*"
@@ -17,7 +17,7 @@ Add **hubot-tell** to your `package.json` file:
 
 Add **hubot-tell** to your `external-scripts.json`:
 
-```json
+```javascript
 ["hubot-tell"]
 ```
 
