@@ -4,6 +4,29 @@
   "version": "1.0.0",
   "author": "Lorenz Hübschle-Schneider <dev@4z2.de>",
   "license": "MIT",
+  
+  "contributors": [
+      {
+          "name": "Uwe L. Korn",
+          "email": "uwelk@xhochy.com"
+      },
+      {
+          "name": "Chris Christensen",
+          "email": "christianchristensen@gmail.com"
+      },
+      {
+          "name": "Fabio Cantoni",
+          "email": "cover@revoc.net"
+      },
+      {
+          "name": "BFGeorge9000",
+          "email": "unknown@unknown"
+      },
+      {
+          "name": "Josh Nichols",
+          "email": "josh@technicalpickles.com"
+      }
+  ],
 
   "keywords": [
     "hubot",
