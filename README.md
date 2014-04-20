@@ -28,7 +28,7 @@ Usage
 
 Assuming your hubot instance is called `hubot`, you can instruct it to relay a message as follows:
 
-`hubot tell <recipient> <message>`
+`hubot: tell <recipient> <message>`
 
 The message will then be stored and relayed to the recipient as soon as he or she enters the room. Case-insensitive prefix matching is used to match the recipient's nickname. That way, you can make sure that your message will reach its destination, even if the recipient has a different nickname suffix. If you send a message to `foo`, and `foo1` joins the room, the message will be delivered to them.
 
