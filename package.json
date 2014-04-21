@@ -43,7 +43,8 @@
   },
 
   "dependencies": {
-    "coffee-script": "~1.7"
+    "coffee-script": "~1.7",
+    "timeago": "~0.1"
   },
 
   "devDependencies": {
