@@ -2,10 +2,11 @@
 #   Tell Hubot to send a user a message when present in the room
 #
 # Dependencies:
-#   timeago
+#   timeago (if HUBOT_TELL_RELATIVE_TIME is set)
 #
 # Configuration:
 #   HUBOT_TELL_ALIASES [optional] - Comma-separated string of command aliases for "tell".
+#   HUBOT_TELL_RELATIVE_TIME [boolean] - Set to use relative time strings ("2 hours ago")
 #
 # Commands:
 #   hubot tell <recipients> <some message> - tell <recipients> <some message> next time they are present.
@@ -25,6 +26,7 @@ config =
     process.env.HUBOT_TELL_ALIASES.split(',').filter((x) -> x?.length)
   else
     []
+  relativeTime: process.env.HUBOT_TELL_RELATIVE_TIME?
 
 module.exports = (robot) ->
   localstorage = {}
@@ -52,7 +54,8 @@ module.exports = (robot) ->
 
   # When a user enters, check if someone left them a message
   robot.enter (msg) ->
-    timeago = require('timeago')
+    if config.relativeTime
+      timeago = require('timeago')
     username = msg.message.user.name
     room = msg.message.user.room
     if localstorage[room]?
@@ -61,7 +64,10 @@ module.exports = (robot) ->
         if username.match(new RegExp("^#{recipient}"), "i")
           tellmessage = "#{username}: "
           for message in localstorage[room][recipient]
-            timestr = timeago(message[1])
+            if config.relativeTime
+              timestr = timeago(message[1])
+            else
+              timestr = "at #{message[1].toLocaleString()}"
             tellmessage += "#{message[0]} said #{timestr}: #{message[2]}\r\n"
           delete localstorage[room][recipient]
           msg.send(tellmessage)
