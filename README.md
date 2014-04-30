@@ -28,9 +28,16 @@ Usage
 
 Assuming your hubot instance is called `hubot`, you can instruct it to relay a message as follows:
 
-`hubot: tell <recipient> <message>`
+`hubot: tell <recipients> <message>`
 
-The message will then be stored and relayed to the recipient as soon as he or she enters the room. Case-insensitive prefix matching is used to match the recipient's nickname. That way, you can make sure that your message will reach its destination, even if the recipient has a different nickname suffix. If you send a message to `foo`, and `foo1` joins the room, the message will be delivered to them.
+The message will then be stored and relayed to the recipient(s) as soon as they enter the room. You can specifiy a comma-separated list to send your message to multiple users.
+
+Case-insensitive prefix matching is used to match the recipients' nicknames. That way, you can make sure that your message will reach its destination, even if the recipient has a different nickname suffix. If you send a message to `foo`, and `foo1` joins the room, the message will be delivered to them.
+
+Configuration
+-------------
+
+By default, this script uses absolute timestamps to indicate when a message was sent. If you prefer relative timestamps of the form `2 hours ago` over absolute ones like `Mon Apr 21 2014 10:37:28 GMT+0200 (CEST)`, set the evironment variable `HUBOT_TELL_RELATIVE_TIME`.
 
 Original Authors
 ----------------
