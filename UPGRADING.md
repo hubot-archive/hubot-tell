@@ -6,7 +6,6 @@ If you're reading this document, you've most likely been referred here because y
 To upgrade, you first need to remove `"tell.coffee"` from the list in your `hubot-scripts.json` configuration.
 
 Next, add `hubot-tell` to the dependencies section of your `package.json` file:
-
 ```javascript
 "dependencies": {
   "hubot": ">= 2.5.1",
@@ -15,7 +14,6 @@ Next, add `hubot-tell` to the dependencies section of your `package.json` file:
 ```
 
 Now, add `hubot-tell` to your `external-scripts.json`:
-
 ```javascript
 ["hubot-tell"]
 ```
