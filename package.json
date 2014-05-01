@@ -2,13 +2,17 @@
   "name": "hubot-tell",
   "description": "Hubot plugin to send a user a message the next time they are present in the room",
   "version": "1.1.0",
-  "author": "Lorenz Hübschle-Schneider <dev@4z2.de>",
+  "author": "Lorenz Hübschle-Schneider <lorenz@4z2.de>",
   "license": "MIT",
 
   "contributors": [
       {
           "name": "Uwe L. Korn",
           "email": "uwelk@xhochy.com"
+      },
+      {
+          "name": "Patrick Connolly",
+          "email": "patrick.c.connolly@gmail.com"
       },
       {
           "name": "Chris Christensen",
@@ -35,7 +39,7 @@
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/lorenzhs/hubot-tell.git"
+    "url": "https://github.com/lorenzhs/hubot-tell.git"
   },
 
   "bugs": {
