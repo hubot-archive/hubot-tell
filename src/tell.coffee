@@ -29,17 +29,18 @@ config =
   relativeTime: process.env.HUBOT_TELL_RELATIVE_TIME?
 
 module.exports = (robot) ->
-  localstorage = {}
-
   commands = ['tell'].concat(config.aliases)
   commands = commands.join('|')
 
   REGEX = ///(#{commands})\s+([\w,.-]+):?\s+(.*)///i
 
   robot.respond REGEX, (msg) ->
+    localstorage = JSON.parse(robot.brain.get 'hubot-tell') or {}
+
     verb = msg.match[1]
     recipients = msg.match[2].split(',').filter((x) -> x?.length)
     message = msg.match[3]
+
     room = msg.message.user.room
     tellmessage = [msg.message.user.name, new Date(), message]
     if not localstorage[room]?
@@ -50,10 +51,14 @@ module.exports = (robot) ->
       else
         localstorage[room][recipient] = [tellmessage]
     msg.send("Ok, I'll #{verb} #{recipients.join(', ')} '#{message}'.")
+    robot.brain.set 'hubot-tell', JSON.stringify(localstorage)
+    robot.brain.save()
     return
 
   # When a user enters, check if someone left them a message
   robot.enter (msg) ->
+    localstorage = JSON.parse(robot.brain.get 'hubot-tell') or {}
+
     if config.relativeTime
       timeago = require('timeago')
     username = msg.message.user.name
@@ -70,5 +75,7 @@ module.exports = (robot) ->
               timestr = "at #{message[1].toLocaleString()}"
             tellmessage += "#{message[0]} said #{timestr}: #{message[2]}\r\n"
           delete localstorage[room][recipient]
+          robot.brain.set 'hubot-tell', JSON.stringify(localstorage)
+          robot.brain.save()
           msg.send(tellmessage)
     return
