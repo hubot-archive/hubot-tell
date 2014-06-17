@@ -1,56 +1,50 @@
 {
   "name": "hubot-tell",
   "description": "Hubot plugin to send a user a message the next time they are present in the room",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Lorenz Hübschle-Schneider <lorenz@4z2.de>",
   "license": "MIT",
-
   "contributors": [
-      {
-          "name": "Uwe L. Korn",
-          "email": "uwelk@xhochy.com"
-      },
-      {
-          "name": "Patrick Connolly",
-          "email": "patrick.c.connolly@gmail.com"
-      },
-      {
-          "name": "Chris Christensen",
-          "email": "christianchristensen@gmail.com"
-      },
-      {
-          "name": "Fabio Cantoni",
-          "email": "cover@revoc.net"
-      },
-      {
-          "name": "BFGeorge9000",
-          "email": "unknown@unknown"
-      },
-      {
-          "name": "Josh Nichols",
-          "email": "josh@technicalpickles.com"
-      }
+    {
+      "name": "Uwe L. Korn",
+      "email": "uwelk@xhochy.com"
+    },
+    {
+      "name": "Patrick Connolly",
+      "email": "patrick.c.connolly@gmail.com"
+    },
+    {
+      "name": "Chris Christensen",
+      "email": "christianchristensen@gmail.com"
+    },
+    {
+      "name": "Fabio Cantoni",
+      "email": "cover@revoc.net"
+    },
+    {
+      "name": "BFGeorge9000",
+      "email": "unknown@unknown"
+    },
+    {
+      "name": "Josh Nichols",
+      "email": "josh@technicalpickles.com"
+    }
   ],
-
   "keywords": [
     "hubot",
     "hubot-scripts"
   ],
-
   "repository": {
     "type": "git",
     "url": "https://github.com/lorenzhs/hubot-tell.git"
   },
-
   "bugs": {
     "url": "https://github.com/lorenzhs/hubot-tell/issues"
   },
-
   "dependencies": {
     "coffee-script": "~1.7",
     "timeago": "~0.1"
   },
-
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
@@ -61,9 +55,7 @@
     "matchdep": "~0.1.2",
     "grunt-contrib-watch": "~0.5.3"
   },
-
   "main": "index.coffee",
-
   "scripts": {
     "test": "grunt test"
   }
