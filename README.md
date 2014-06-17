@@ -34,6 +34,8 @@ The message will then be stored and relayed to the recipient(s) as soon as they 
 
 Case-insensitive prefix matching is used to match the recipients' nicknames. That way, you can make sure that your message will reach its destination, even if the recipient has a different nickname suffix. If you send a message to `foo`, and `foo1` joins the room, the message will be delivered to them.
 
+If your hubot has a persistent brain (e.g. with redis), messages will be preserved there even if you restart your life embetterment robot.
+
 Configuration
 -------------
 
