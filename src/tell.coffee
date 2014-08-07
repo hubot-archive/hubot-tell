@@ -70,7 +70,7 @@ module.exports = (robot) ->
           tellmessage = "#{username}: "
           for message in localstorage[room][recipient]
             # Also check that we have successfully loaded timeago
-            if config.relativeTime && timeago !== null
+            if config.relativeTime && timeago?
               timestr = timeago(message[1])
             else
               timestr = "at #{message[1].toLocaleString()}"
