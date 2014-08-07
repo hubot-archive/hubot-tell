@@ -69,7 +69,8 @@ module.exports = (robot) ->
         if username.match(new RegExp("^#{recipient}"), "i")
           tellmessage = "#{username}: "
           for message in localstorage[room][recipient]
-            if config.relativeTime
+            # Also check that we have successfully loaded timeago
+            if config.relativeTime && timeago !== null
               timestr = timeago(message[1])
             else
               timestr = "at #{message[1].toLocaleString()}"
