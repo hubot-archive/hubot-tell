@@ -66,7 +66,7 @@ module.exports = (robot) ->
     if localstorage[room]?
       for recipient, message of localstorage[room]
         # Check if the recipient matches username
-        if username.match(new RegExp("^#{recipient}"), "i")
+        if username.match new RegExp("^#{recipient}", "i")
           tellmessage = "#{username}: "
           for message in localstorage[room][recipient]
             # Also check that we have successfully loaded timeago
