@@ -20,4 +20,4 @@ Now, add `hubot-tell` to your `external-scripts.json`:
 
 Finally, run `npm install` to install the package.
 
-That's it, you're ready to go! Usage of the script has remained largely the same -- all we've done is added some nifty new features you might like! Check out the [README](https://github.com/lorenzhs/hubot-tell/blob/master/README.md) for more information.
+That's it, you're ready to go! Usage of the script has remained largely the same -- all we've done is added some nifty new features you might like! Check out the [README](https://github.com/hubot-scripts/hubot-tell/blob/master/README.md) for more information.
