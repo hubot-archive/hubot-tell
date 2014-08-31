@@ -36,10 +36,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lorenzhs/hubot-tell.git"
+    "url": "https://github.com/hubot-scripts/hubot-tell.git"
   },
   "bugs": {
-    "url": "https://github.com/lorenzhs/hubot-tell/issues"
+    "url": "https://github.com/hubot-scripts/hubot-tell/issues"
   },
   "dependencies": {
     "coffee-script": "~1.7",
