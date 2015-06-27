@@ -41,7 +41,7 @@ module.exports = (robot) ->
     recipients = msg.match[2].split(',').filter((x) -> x?.length)
     message = msg.match[3]
 
-    room = if msg.message.user.reply_to then msg.message.user.reply_to else msg.message.user.room
+    room = msg.message.user.reply_to || msg.message.user.room
     tellmessage = [msg.message.user.name, new Date(), message]
     if not localstorage[room]?
       localstorage[room] = {}
