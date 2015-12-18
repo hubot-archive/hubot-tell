@@ -77,6 +77,7 @@ module.exports = (robot) ->
     if not localstorage[room]?
       localstorage[room] = {}
     for recipient in recipients
+      robot.logger.debug "storing message in #{room} for #{recipient}"
       if localstorage[room][recipient]?
         localstorage[room][recipient].push(tellmessage)
       else
