@@ -32,7 +32,7 @@ module.exports = (robot) ->
   commands = ['tell'].concat(config.aliases)
   commands = commands.join('|')
 
-  REGEX = ///(#{commands})\s+([\w,.-]+):?\s+(.*)///i
+  REGEX = ///(#{commands})\s+@?([\w,.-]+):?\s+(.*)///i
 
   robot.respond REGEX, (msg) ->
     localstorage = JSON.parse(robot.brain.get 'hubot-tell') or {}
