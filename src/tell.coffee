@@ -28,6 +28,37 @@ config =
     []
   relativeTime: process.env.HUBOT_TELL_RELATIVE_TIME?
 
+if config.relativeTime
+  timeago = require('timeago')
+
+check_messages = (robot, room, username) ->
+  localstorage = JSON.parse(robot.brain.get 'hubot-tell') or {}
+  tellmessages = []
+
+  robot.logger.debug "hubot-tell: checking msgs in #{room} for #{username}"
+
+  if localstorage[room]?
+    for recipient, message of localstorage[room]
+      # Check if the recipient matches username
+      if username.match new RegExp("^#{recipient}", "i")
+        tellmessage = "#{username}: "
+        for message in localstorage[room][recipient]
+          # Also check that we have successfully loaded timeago
+          if config.relativeTime && timeago?
+            timestr = timeago(message[1])
+          else
+            timestr = "at #{message[1].toLocaleString()}"
+          tellmessage += "#{message[0]} said #{timestr}: #{message[2]}\r\n"
+          tellmessages.push tellmessage
+        delete localstorage[room][recipient]
+
+  robot.logger.debug "hubot-tell: there are #{tellmessages.length} messages for #{username}"
+
+  robot.brain.set 'hubot-tell', JSON.stringify(localstorage)
+  robot.brain.save()
+
+  return tellmessages
+
 module.exports = (robot) ->
   commands = ['tell'].concat(config.aliases)
   commands = commands.join('|')
@@ -46,6 +77,7 @@ module.exports = (robot) ->
     if not localstorage[room]?
       localstorage[room] = {}
     for recipient in recipients
+      robot.logger.debug "storing message in #{room} for #{recipient}"
       if localstorage[room][recipient]?
         localstorage[room][recipient].push(tellmessage)
       else
@@ -55,28 +87,17 @@ module.exports = (robot) ->
     robot.brain.save()
     return
 
+  robot.hear /.+/i, (msg) ->
+    speaker = msg.message.user.name
+    room = msg.message.user.reply_to || msg.message.user.room
+
+    for tellmessage in check_messages(robot, room, speaker)
+      msg.send tellmessage
+
   # When a user enters, check if someone left them a message
   robot.enter (msg) ->
-    localstorage = JSON.parse(robot.brain.get 'hubot-tell') or {}
-
-    if config.relativeTime
-      timeago = require('timeago')
     username = msg.message.user.name
     room = msg.message.user.room
-    if localstorage[room]?
-      for recipient, message of localstorage[room]
-        # Check if the recipient matches username
-        if username.match new RegExp("^#{recipient}", "i")
-          tellmessage = "#{username}: "
-          for message in localstorage[room][recipient]
-            # Also check that we have successfully loaded timeago
-            if config.relativeTime && timeago?
-              timestr = timeago(message[1])
-            else
-              timestr = "at #{message[1].toLocaleString()}"
-            tellmessage += "#{message[0]} said #{timestr}: #{message[2]}\r\n"
-          delete localstorage[room][recipient]
-          robot.brain.set 'hubot-tell', JSON.stringify(localstorage)
-          robot.brain.save()
-          msg.send(tellmessage)
-    return
+
+    for tellmessage in check_messages(localstorage, room, speaker)
+      msg.send tellmessage
